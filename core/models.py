@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 #Para não fazer uma tabela de usuárui, estou usando os usuário do django
@@ -24,6 +25,14 @@ class Evento(models.Model):
 
     def get_data_input_evento(self):
         return self.data_evento.strftime('%Y-%m-%dT%H:%M')
+
+    def get_evento_atrasado(self):
+        if self.data_evento < datetime.now():
+            return True
+        else:
+            return False
+
+
 
 
 ## python manage.py makemigration core ou depois
